@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rooted & Rising — Makayla Bryan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --plum:  #6B3F6E;
+      --rose:  #C4748A;
+      --blush: #F2CECE;
+      --cream: #FDF6F0;
+      --gold:  #C9944A;
+      --ink:   #2C1E2E;
+      --muted: #7A6070;
+      --white: #FFFFFF;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.75; }
+
+    /* ── NAV ── */
+    header { background: var(--plum); position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 20px rgba(107,63,110,0.3); }
+    nav { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--blush); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; cursor: pointer; }
+    .nav-links a:hover { color: var(--blush); }
+
+    /* ── HERO ── */
+    .hero { background: linear-gradient(135deg, var(--plum) 0%, #9B5E9E 50%, var(--rose) 100%); padding: 6rem 2rem 5rem; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .hero-eyebrow { font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blush); margin-bottom: 1rem; position: relative; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5rem); color: var(--white); line-height: 1.1; margin-bottom: 0.5rem; position: relative; animation: fadeUp 0.7s ease both; }
+    .hero h1 em { color: var(--blush); font-style: italic; }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.8); max-width: 520px; margin: 1.2rem auto 2rem; position: relative; font-weight: 300; animation: fadeUp 0.7s 0.15s ease both; }
+    .hero-verse { display: inline-block; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 50px; padding: 0.6rem 1.6rem; font-size: 0.85rem; color: rgba(255,255,255,0.9); font-style: italic; position: relative; animation: fadeUp 0.7s 0.3s ease both; }
+    .hero-scroll { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.5); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip { background: var(--white); padding: 3.5rem 2rem; text-align: center; border-bottom: 3px solid var(--blush); }
+    .about-strip p { max-width: 680px; margin: 0 auto; font-size: 1.05rem; color: var(--muted); line-height: 1.9; }
+    .about-strip strong { color: var(--plum); }
+
+    /* ── MAIN LAYOUT ── */
+    .main-wrap { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: start; }
+    .section-label { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rose); font-weight: 700; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--blush); }
+
+    /* ── FEATURED POST ── */
+    .featured-post { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 30px rgba(107,63,110,0.08); margin-bottom: 2.5rem; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+    .featured-post:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(107,63,110,0.14); }
+    .featured-banner { background: linear-gradient(135deg, var(--plum), var(--rose)); padding: 3rem 2.5rem; position: relative; overflow: hidden; }
+    .featured-banner::after { content: '✦'; position: absolute; right: 2rem; top: 50%; transform: translateY(-50%); font-size: 5rem; color: rgba(255,255,255,0.08); }
+    .featured-tag { display: inline-block; background: var(--gold); color: var(--white); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.9rem; border-radius: 50px; margin-bottom: 1rem; font-weight: 700; }
+    .featured-banner h2 { font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--white); line-height: 1.25; margin-bottom: 0.75rem; }
+    .featured-banner p { color: rgba(255,255,255,0.8); font-size: 0.95rem; font-weight: 300; }
+    .featured-body { padding: 2rem 2.5rem; }
+    .featured-body p { color: var(--muted); font-size: 0.98rem; line-height: 1.85; margin-bottom: 1.25rem; }
+    .read-more { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--plum); font-weight: 700; font-size: 0.88rem; letter-spacing: 0.05em; text-decoration: none; text-transform: uppercase; border-bottom: 2px solid var(--blush); padding-bottom: 2px; transition: border-color 0.2s, color 0.2s; background: none; border-top: none; border-left: none; border-right: none; cursor: pointer; font-family: 'Lato', sans-serif; }
+    .read-more:hover { color: var(--rose); border-bottom-color: var(--rose); }
+
+    /* ── POST GRID ── */
+    .post-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .post-card { background: var(--white); border-radius: 12px; padding: 1.75rem; box-shadow: 0 2px 16px rgba(107,63,110,0.06); transition: transform 0.3s, box-shadow 0.3s; border-top: 4px solid var(--blush); cursor: pointer; }
+    .post-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(107,63,110,0.12); border-top-color: var(--rose); }
+    .post-category { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rose); font-weight: 700; margin-bottom: 0.6rem; }
+    .post-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--ink); line-height: 1.35; margin-bottom: 0.7rem; }
+    .post-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    .post-meta { font-size: 0.75rem; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
+    .post-meta span { color: var(--blush); }
+
+    /* ── SIDEBAR ── */
+    .sidebar { display: flex; flex-direction: column; gap: 2rem; }
+    .sidebar-card { background: var(--white); border-radius: 14px; padding: 1.75rem; box-shadow: 0 2px 16px rgba(107,63,110,0.06); }
+    .sidebar-card h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--plum); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--blush); }
+    .about-card-inner { text-align: center; }
+    .avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--plum), var(--rose)); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+    .about-card-inner h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--ink); margin-bottom: 0.4rem; }
+    .about-card-inner p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+    .subscribe-card { background: linear-gradient(135deg, var(--plum), #9B5E9E); color: var(--white); }
+    .subscribe-card h4 { color: var(--blush); border-bottom-color: rgba(255,255,255,0.2); }
+    .subscribe-card p { font-size: 0.88rem; color: rgba(255,255,255,0.8); margin-bottom: 1.25rem; line-height: 1.7; }
+    .subscribe-input { width: 100%; padding: 0.75rem 1rem; border-radius: 8px; border: none; font-family: 'Lato', sans-serif; font-size: 0.9rem; margin-bottom: 0.75rem; outline: none; }
+    .subscribe-btn { width: 100%; padding: 0.75rem; background: var(--gold); color: var(--white); border: none; border-radius: 8px; font-family: 'Lato', sans-serif; font-size: 0.88rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .subscribe-btn:hover { background: #b8833e; }
+    .topics { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .topic-pill { background: var(--cream); color: var(--plum); border: 1px solid var(--blush); padding: 0.35rem 0.85rem; border-radius: 50px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: all 0.2s; }
+    .topic-pill:hover { background: var(--plum); color: var(--white); border-color: var(--plum); }
+    .verse-card { background: var(--cream); border-left: 4px solid var(--gold); }
+    .verse-card h4 { border-bottom-color: var(--blush); }
+    .verse-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--ink); line-height: 1.7; margin-bottom: 0.5rem; }
+    .verse-ref { font-size: 0.8rem; color: var(--gold); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .social-links { display: flex; flex-direction: column; gap: 0.75rem; }
+    .social-link { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: var(--cream); border-radius: 8px; text-decoration: none; color: var(--ink); font-size: 0.88rem; font-weight: 700; transition: all 0.2s; }
+    .social-link:hover { background: var(--plum); color: var(--white); }
+    .social-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .ig-icon { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--ink); color: rgba(255,255,255,0.6); text-align: center; padding: 2.5rem 2rem; font-size: 0.85rem; }
+    footer strong { color: var(--blush); font-family: 'Playfair Display', serif; }
+    footer a { color: var(--blush); text-decoration: none; }
+
+    /* ── MODAL (Full Article) ── */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(44,30,46,0.7); z-index: 500; backdrop-filter: blur(4px); overflow-y: auto; padding: 2rem 1rem; }
+    .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+    .modal { background: var(--white); border-radius: 20px; max-width: 720px; width: 100%; margin: auto; overflow: hidden; animation: slideUp 0.35s ease; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    .modal-header { background: linear-gradient(135deg, var(--plum), var(--rose)); padding: 2.5rem; position: relative; }
+    .modal-header .modal-cat { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blush); font-weight: 700; margin-bottom: 0.75rem; }
+    .modal-header h2 { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--white); line-height: 1.25; }
+    .modal-close { position: absolute; top: 1.25rem; right: 1.25rem; background: rgba(255,255,255,0.2); border: none; color: var(--white); width: 36px; height: 36px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .modal-close:hover { background: rgba(255,255,255,0.35); }
+    .modal-body { padding: 2.5rem; }
+    .modal-body p { color: var(--muted); font-size: 0.98rem; line-height: 1.9; margin-bottom: 1.25rem; }
+    .modal-body h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--plum); margin: 1.75rem 0 0.75rem; }
+
+    /* ── COMMENTS ── */
+    .comments-section { padding: 0 2.5rem 2.5rem; border-top: 2px solid var(--blush); }
+    .comments-section h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--plum); padding: 1.5rem 0 1rem; }
+    .comment-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
+    .comment { background: var(--cream); border-radius: 10px; padding: 1rem 1.25rem; }
+    .comment-author { font-weight: 700; font-size: 0.88rem; color: var(--plum); margin-bottom: 0.25rem; }
+    .comment-text { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+    .comment-time { font-size: 0.72rem; color: #bbb; margin-top: 0.3rem; }
+    .comment-form { display: flex; flex-direction: column; gap: 0.75rem; }
+    .comment-form input, .comment-form textarea { border: 2px solid var(--blush); border-radius: 8px; padding: 0.75rem 1rem; font-family: 'Lato', sans-serif; font-size: 0.9rem; color: var(--ink); background: var(--white); outline: none; transition: border-color 0.2s; resize: vertical; }
+    .comment-form input:focus, .comment-form textarea:focus { border-color: var(--rose); }
+    .comment-submit { background: var(--plum); color: var(--white); border: none; border-radius: 8px; padding: 0.75rem 1.5rem; font-family: 'Lato', sans-serif; font-size: 0.88rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; align-self: flex-start; }
+    .comment-submit:hover { background: var(--rose); }
+
+    /* ── CONTACT MODAL ── */
+    .contact-section { max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem; }
+    .contact-card { background: var(--white); border-radius: 16px; padding: 3rem; box-shadow: 0 4px 30px rgba(107,63,110,0.08); display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .contact-info h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--plum); margin-bottom: 1rem; }
+    .contact-info p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .contact-detail { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--ink); }
+    .contact-detail-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--blush); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .prayer-badge { display: inline-block; background: linear-gradient(135deg, var(--plum), var(--rose)); color: var(--white); padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--plum); margin-bottom: 0.4rem; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; border: 2px solid var(--blush); border-radius: 8px; padding: 0.75rem 1rem; font-family: 'Lato', sans-serif; font-size: 0.9rem; color: var(--ink); background: var(--white); outline: none; transition: border-color 0.2s; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--rose); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-submit { width: 100%; padding: 0.9rem; background: linear-gradient(135deg, var(--plum), var(--rose)); color: var(--white); border: none; border-radius: 10px; font-family: 'Lato', sans-serif; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
+    .form-submit:hover { opacity: 0.9; }
+
+    /* ── SUCCESS MESSAGES ── */
+    .success-msg { display: none; background: #f0fdf4; border: 2px solid #86efac; border-radius: 10px; padding: 1rem 1.25rem; color: #166534; font-size: 0.9rem; font-weight: 700; margin-top: 0.75rem; text-align: center; }
+    .success-msg.show { display: block; }
+
+    /* ── PAGE SECTIONS (show/hide) ── */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+    #home-section { display: block; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .main-wrap { grid-template-columns: 1fr; }
+      .post-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .contact-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <nav>
+    <a class="nav-logo" href="#" onclick="showSection('home')">Rooted <span>&</span> Rising</a>
+    <ul class="nav-links">
+      <li><a onclick="showSection('home')">Home</a></li>
+      <li><a onclick="showSection('home')">Blog</a></li>
+      <li><a onclick="showSection('home')">About</a></li>
+      <li><a onclick="showSection('contact')">Contact</a></li>
+      <li><a onclick="showSection('contact')" style="color:var(--blush);font-weight:700">🙏 Prayer Request</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ══════════════ HOME SECTION ══════════════ -->
+<div id="home-section" class="page-section active">
+
+  <section class="hero">
+    <p class="hero-eyebrow">✦ Welcome to the community ✦</p>
+    <h1>Rooted <em>&</em> Rising</h1>
+    <p class="hero-sub">A faith-centered space for young moms navigating motherhood, healing, and becoming — together.</p>
+    <div class="hero-verse">"She is clothed with strength and dignity." — Proverbs 31:25</div>
+    <div class="hero-scroll">↓ scroll</div>
+  </section>
+
+  <div class="about-strip">
+    <p>Hey mama, I'm <strong>Makayla</strong> — a 22-year-old born-again Christian wife and mom sharing the real, unfiltered journey of young motherhood. From <strong>pregnancy loss</strong> to postpartum depression, breastfeeding struggles to financial strain — I've been there. And I believe <strong>no young mom should walk it alone.</strong></p>
+  </div>
+
+  <div class="main-wrap">
+    <main>
+      <div class="section-label">Latest Posts</div>
+
+      <!-- Featured -->
+      <article class="featured-post" onclick="openPost('featured')">
+        <div class="featured-banner">
+          <div class="featured-tag">✦ Featured</div>
+          <h2>The Miscarriage Nobody Talks About: My Story of Loss, Faith & Trying Again</h2>
+          <p>November 2024 changed everything. Here's what I wish someone had told me.</p>
+        </div>
+        <div class="featured-body">
+          <p>I was 21 years old when I found out I was pregnant for the first time. I was terrified and excited and completely unprepared — and then, just as quickly as the joy came, it was gone. My miscarriage in November 2024 was the loneliest experience of my life. Not because people didn't care, but because nobody knew what to say. Nobody talked about it.</p>
+          <p>So I'm going to. Because you deserve to know that grief after pregnancy loss is real, it is heavy, and it does not mean your faith isn't strong enough...</p>
+          <button class="read-more">Continue Reading →</button>
+        </div>
+      </article>
+
+      <div class="section-label">More Stories</div>
+      <div class="post-grid">
+        <article class="post-card" onclick="openPost('ppd')">
+          <div class="post-category">Postpartum & Mental Health</div>
+          <h3>What Postpartum Depression Actually Feels Like (Not the Pinterest Version)</h3>
+          <p>It's not always crying. Sometimes it's numbness, rage, and feeling like a stranger in your own home.</p>
+          <div class="post-meta">Makayla Bryan <span>✦</span> Mental Health</div>
+        </article>
+        <article class="post-card" onclick="openPost('breastfeeding')">
+          <div class="post-category">Breastfeeding</div>
+          <h3>Breastfeeding is Beautiful and Also Incredibly Hard — Both Things Are True</h3>
+          <p>The latch pain, the cluster feeding, the mastitis nobody warned you about. Here's what actually helped.</p>
+          <div class="post-meta">Makayla Bryan <span>✦</span> Breastfeeding</div>
+        </article>
+        <article class="post-card" onclick="openPost('faith')">
+          <div class="post-category">Faith & Motherhood</div>
+          <h3>5 Scriptures That Carried Me Through My Hardest Postpartum Days</h3>
+          <p>When I couldn't pray full sentences, I leaned on these verses. Maybe they'll hold you too.</p>
+          <div class="post-meta">Makayla Bryan <span>✦</span> Faith</div>
+        </article>
+        <article class="post-card" onclick="openPost('marriage')">
+          <div class="post-category">Marriage & Relationships</div>
+          <h3>When a Baby Exposes Every Crack in Your Relationship</h3>
+          <p>Nobody tells you that having a baby together can also pull you apart. Here's how we're navigating it.</p>
+          <div class="post-meta">Makayla Bryan <span>✦</span> Marriage</div>
+        </article>
+        <article class="post-card" onclick="openPost('finances')">
+          <div class="post-category">Finances</div>
+          <h3>How We're Making It Work on One Income With a Newborn</h3>
+          <p>Practical budgeting strategies for young families who are figuring it out week by week.</p>
+          <div class="post-meta">Makayla Bryan <span>✦</span> Finances</div>
+        </article>
+        <article class="post-card" onclick="openPost('community')">
+          <div class="post-category">Community</div>
+          <h3>Finding Your Mom Tribe When You Feel Like You Don't Fit In</h3>
+          <p>At 22, I was the youngest mom at every playdate. Here's how I stopped feeling like an outsider.</p>
+          <div class="post-meta">Makayla Bryan <span>✦</span> Community</div>
+        </article>
+      </div>
+    </main>
+
+    <aside class="sidebar">
+      <!-- About -->
+      <div class="sidebar-card">
+        <div class="about-card-inner">
+          <div class="avatar">🌸</div>
+          <h3>Makayla Bryan</h3>
+          <p>22-year-old wife, mama, and born-again Christian sharing the real journey of young motherhood — faith, healing, and all the in-between.</p>
+        </div>
+      </div>
+
+      <!-- Subscribe — powered by Mailchimp embed or mailto fallback -->
+      <div class="sidebar-card subscribe-card">
+        <h4>Join the Community</h4>
+        <p>Weekly devotionals, honest mama moments, and encouragement straight to your inbox. No spam — just soul food.</p>
+        <input class="subscribe-input" id="sidebar-email" type="email" placeholder="your@email.com" />
+        <button class="subscribe-btn" onclick="handleSubscribe('sidebar-email','sidebar-success')">I'm In ✦</button>
+        <div class="success-msg" id="sidebar-success">✦ Welcome to the community, mama! 🌸</div>
+      </div>
+
+      <!-- Verse -->
+      <div class="sidebar-card verse-card">
+        <h4>✦ This Week's Verse</h4>
+        <p class="verse-text">"For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future."</p>
+        <p class="verse-ref">— Jeremiah 29:11</p>
+      </div>
+
+      <!-- Topics -->
+      <div class="sidebar-card">
+        <h4>Browse by Topic</h4>
+        <div class="topics">
+          <span class="topic-pill">Postpartum</span>
+          <span class="topic-pill">Faith</span>
+          <span class="topic-pill">Breastfeeding</span>
+          <span class="topic-pill">Marriage</span>
+          <span class="topic-pill">Pregnancy Loss</span>
+          <span class="topic-pill">Mental Health</span>
+          <span class="topic-pill">Finances</span>
+          <span class="topic-pill">Community</span>
+          <span class="topic-pill">Baby & Newborn</span>
+          <span class="topic-pill">Self-Care</span>
+        </div>
+      </div>
+
+      <!-- Social -->
+      <div class="sidebar-card">
+        <h4>Find Me Online</h4>
+        <div class="social-links">
+          <a href="https://instagram.com/RootedAndRising0725" target="_blank" class="social-link">
+            <div class="social-icon ig-icon">📸</div>@RootedAndRising0725
+          </a>
+          <a href="mailto:Rootedandrising0725@gmail.com" class="social-link">
+            <div class="social-icon" style="background:#C4748A">✉️</div>Send me a message
+          </a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- ══════════════ CONTACT / PRAYER SECTION ══════════════ -->
+<div id="contact-section" class="page-section">
+  <section class="hero" style="padding:4rem 2rem 3rem">
+    <p class="hero-eyebrow">✦ Reach Out ✦</p>
+    <h1 style="font-size:clamp(2rem,5vw,3.5rem)">Contact <em>&</em> Prayer</h1>
+    <p class="hero-sub" style="margin-bottom:0">I read every message. You are not alone.</p>
+  </section>
+
+  <div class="contact-section" style="margin-top:3rem">
+    <div class="contact-card">
+      <!-- Left: info -->
+      <div class="contact-info">
+        <div class="prayer-badge">🙏 Prayer Requests Welcome</div>
+        <h2>Let's Connect, Mama</h2>
+        <p>Whether you need prayer, want to share your story, have a question, or just need someone to say "me too" — my inbox is open. I read every single message personally.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉️</div>
+          <span>Rootedandrising0725@gmail.com</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📸</div>
+          <span>@RootedAndRising0725</span>
+        </div>
+        <div style="margin-top:1.5rem;padding:1.25rem;background:var(--cream);border-radius:10px;border-left:4px solid var(--gold)">
+          <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:0.95rem;color:var(--ink);margin-bottom:0.4rem">"The prayer of a righteous person is powerful and effective."</p>
+          <p style="font-size:0.78rem;color:var(--gold);font-weight:700;letter-spacing:0.06em;text-transform:uppercase">— James 5:16</p>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div>
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="contact-name" placeholder="First name is fine 🌸" />
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="contact-email" placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label>What brings you here?</label>
+          <select id="contact-type">
+            <option value="">Select one...</option>
+            <option value="prayer">🙏 Prayer Request</option>
+            <option value="story">💌 Share My Story</option>
+            <option value="coaching">✨ Coaching / Support</option>
+            <option value="collab">🤝 Collaboration</option>
+            <option value="general">💬 Just Saying Hi</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Message</label>
+          <textarea id="contact-message" placeholder="Whatever is on your heart — this is a safe space..."></textarea>
+        </div>
+        <button class="form-submit" onclick="handleContact()">Send Message ✦</button>
+        <div class="success-msg" id="contact-success">✦ Message received! I'll be praying for you and will respond soon. 🌸</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ ARTICLE MODAL ══════════════ -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-cat" id="modal-cat"></div>
+      <h2 id="modal-title"></h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="comments-section">
+      <h3>💬 Comments & Community</h3>
+      <div class="comment-list" id="comment-list"></div>
+      <div class="comment-form">
+        <input type="text" id="comment-name" placeholder="Your name (or Anonymous 🌸)" />
+        <textarea id="comment-text" rows="3" placeholder="Leave a comment, share your story, or just say 'me too'..."></textarea>
+        <button class="comment-submit" onclick="submitComment()">Post Comment ✦</button>
+        <div class="success-msg" id="comment-success">✦ Comment posted! Thank you for sharing. 🌸</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>Rooted & Rising</strong> — A faith-centered community for young moms</p>
+  <p style="margin-top:0.5rem">Made with love by Makayla Bryan &nbsp;|&nbsp; <a href="mailto:Rootedandrising0725@gmail.com">Rootedandrising0725@gmail.com</a> &nbsp;|&nbsp; <a href="https://instagram.com/RootedAndRising0725" target="_blank">@RootedAndRising0725</a></p>
+</footer>
+
+<script>
+  // ── POST CONTENT ──────────────────────────────────────────────
+  const posts = {
+    featured: {
+      cat: '✦ Featured · Pregnancy Loss',
+      title: 'The Miscarriage Nobody Talks About: My Story of Loss, Faith & Trying Again',
+      body: `
+        <p>I was 21 years old when I found out I was pregnant for the first time. I was terrified and excited and completely unprepared — and then, just as quickly as the joy came, it was gone. My miscarriage in November 2024 was the loneliest experience of my life. Not because people didn't care, but because nobody knew what to say. Nobody talked about it.</p>
+        <h3>The silence is the hardest part</h3>
+        <p>When you lose a pregnancy, the world mostly keeps moving. People don't always know you were pregnant. So you grieve in private, wondering if you're allowed to be this devastated over something others might minimize with "at least it was early." But your baby was real. Your love was real. Your grief is real.</p>
+        <h3>What faith looked like in that season</h3>
+        <p>I won't pretend I handled it gracefully. There were days I couldn't open my Bible. Days I was angry at God. And I've come to believe that's okay — that He is big enough to hold our anger, our questions, our silence. Grief isn't a lack of faith. Sometimes it's the most honest prayer you have.</p>
+        <h3>Then, one month later...</h3>
+        <p>In December 2024, I found out I was pregnant again. I cannot describe what that felt like — joy and terror living in the same heartbeat. I spent that entire pregnancy in a strange place between hope and fear, loving fiercely while bracing for loss. And on September 2025, my healthy baby girl entered the world. She is my miracle and my proof that God is not finished.</p>
+        <p>If you've experienced pregnancy loss, I want you to know: your baby mattered. Your grief is valid. And there is still hope ahead for you — even when you can't see it yet.</p>
+      `
+    },
+    ppd: {
+      cat: 'Postpartum & Mental Health',
+      title: 'What Postpartum Depression Actually Feels Like (Not the Pinterest Version)',
+      body: `
+        <p>When most people imagine postpartum depression, they picture a mom crying over her baby. And sometimes it is that. But a lot of the time, PPD looks nothing like that — and that's exactly why so many of us don't recognize it in ourselves.</p>
+        <h3>What nobody told me</h3>
+        <p>For me, PPD felt like numbness. Like being behind glass, watching my own life. I loved my daughter fiercely but felt disconnected from the moment I was supposed to be living. I felt rage — sharp and sudden — over small things. I felt like a stranger in my own body, in my own home.</p>
+        <h3>The lie PPD tells you</h3>
+        <p>PPD tells you that you're broken. That you're a bad mom. That other women are handling this better. That you should be grateful, not struggling. These are all lies. PPD is a medical condition — a hormonal and neurological shift — not a character flaw or a faith failure.</p>
+        <h3>What actually helped me</h3>
+        <p>Telling someone the truth. Not a polished version — the real, ugly truth. Getting outside, even for 10 minutes. Accepting help when it was offered instead of insisting I was fine. Talking to my doctor. And on my darkest days, simply opening my Bible to Psalm 23 and letting those words wash over me even when I couldn't feel them.</p>
+        <p>You are not alone. You are not broken. Please reach out — to me, to a doctor, to someone you trust. 💜</p>
+      `
+    },
+    breastfeeding: {
+      cat: 'Breastfeeding',
+      title: 'Breastfeeding is Beautiful and Also Incredibly Hard — Both Things Are True',
+      body: `
+        <p>Before I had my daughter, I thought breastfeeding would feel natural and instinctive. Nobody warned me about the toe-curling latch pain of the first two weeks, the cluster feeding at 2am that makes you question every life decision, or the way your body can feel like it belongs to someone else entirely.</p>
+        <h3>The things I wish I'd known</h3>
+        <p>Nipple pain in the first 2 weeks is normal — but it should improve. If it doesn't, see a lactation consultant about latch. Most hospitals offer free consultations and they are worth every minute. Cluster feeding is not a sign you're not producing enough — it's your baby telling your body to make more milk. It is exhausting and it passes.</p>
+        <h3>What actually helped me keep going</h3>
+        <p>Nipple cream — lanolin or coconut oil — applied after every single feed. A good nursing pillow that brings baby to breast level so you're not hunching. Staying hydrated obsessively. And honestly? Giving myself permission to take it one feeding at a time instead of committing to a year in my head.</p>
+        <h3>Fed is best. And so is your mental health.</h3>
+        <p>I also want to say this clearly: if breastfeeding is destroying your mental health, formula is a completely valid, loving choice. A nourished baby and a mentally healthy mama matter more than the method. You are doing beautifully either way.</p>
+      `
+    },
+    faith: {
+      cat: 'Faith & Motherhood',
+      title: '5 Scriptures That Carried Me Through My Hardest Postpartum Days',
+      body: `
+        <p>There were days in my postpartum season when I could barely form a coherent prayer. When I opened my Bible and the words blurred. When worship felt distant and faith felt like an effort I didn't have. These are the five verses I returned to again and again — not because I felt them, but because I needed to anchor myself to something true when my feelings couldn't be trusted.</p>
+        <h3>1. Psalm 34:18</h3>
+        <p>"The Lord is close to the brokenhearted and saves those who are crushed in spirit." This verse didn't fix anything. But it reminded me that my brokenness was not keeping God away — it was the very thing drawing Him near.</p>
+        <h3>2. Isaiah 40:31</h3>
+        <p>"But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint." I am still waiting on the soaring. But I am walking. Some days, walking is enough.</p>
+        <h3>3. Lamentations 3:22-23</h3>
+        <p>"Because of the Lord's great love we are not consumed, for his compassions never fail. They are new every morning; great is your faithfulness." New every morning. Not every year. Not when you feel better. Every. Single. Morning.</p>
+        <h3>4. Philippians 4:13</h3>
+        <p>"I can do all this through him who gives me strength." I used to read this verse as motivation. Now I read it as a lifeline — not that I can do hard things by trying harder, but that there is a Source of strength available to me that is not my own.</p>
+        <h3>5. Jeremiah 29:11</h3>
+        <p>"For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future." When the future felt heavy and uncertain, this verse reminded me that Someone already knows what's ahead — and it is good.</p>
+      `
+    },
+    marriage: {
+      cat: 'Marriage & Relationships',
+      title: 'When a Baby Exposes Every Crack in Your Relationship',
+      body: `
+        <p>Nobody puts this in the pregnancy books, but having a baby is one of the greatest stressors a marriage can face. The sleep deprivation alone would break most people. Add hormones, identity shifts, financial pressure, and two people trying to figure out completely new roles — and cracks you didn't know existed suddenly become very visible.</p>
+        <h3>This doesn't mean your marriage is failing</h3>
+        <p>I want to say that clearly because I needed to hear it. Struggling in your marriage after a baby does not mean you made the wrong choice. It means you are two human beings navigating an enormous transition while running on no sleep. Grace has to go both ways.</p>
+        <h3>What we're doing in real time</h3>
+        <p>We are learning to say "I need" instead of "you never." We are trying to remember that we are on the same team, even when it feels like we are opponents. We are talking to God about our marriage, separately and together. And we are being honest — not perfectly, but more than we were before.</p>
+        <h3>A word for the hard nights</h3>
+        <p>If you and your partner are struggling right now, you are not alone. The first year with a baby is genuinely one of the hardest seasons a couple can go through. Keep talking. Keep choosing each other even imperfectly. And if you need outside support — a counselor, a pastor, a trusted mentor — that is a sign of strength, not weakness.</p>
+      `
+    },
+    finances: {
+      cat: 'Finances',
+      title: 'How We\'re Making It Work on One Income With a Newborn',
+      body: `
+        <p>Financial insecurity with a newborn is a specific kind of stress — the kind that wakes you up at 3am alongside the baby. I'm not going to pretend I have it all figured out. But here's what we've actually done to make one income stretch in the early months.</p>
+        <h3>The first thing we did: wrote down every dollar</h3>
+        <p>Not a fancy budget — just a piece of paper with income on one side and every expense on the other. Seeing it clearly was scary. It was also the only way to make intentional choices instead of reactive ones.</p>
+        <h3>What we cut and what we kept</h3>
+        <p>We cut: subscriptions we forgot we had, eating out more than once a week, and buying new when secondhand was available. We kept: reliable transportation (non-negotiable), anything that protected our mental health, and a small amount of "breathing room" money so we didn't feel completely deprived.</p>
+        <h3>Resources that actually helped</h3>
+        <p>WIC was a game changer for us — if you qualify, please apply without shame. Food banks, church pantries, and community resources exist for exactly this season. And buying baby items secondhand (except car seats) saves hundreds of dollars without sacrificing anything important.</p>
+        <p>You are not failing because money is tight with a newborn. You are surviving a genuinely hard season. Keep going. 💜</p>
+      `
+    },
+    community: {
+      cat: 'Community',
+      title: 'Finding Your Mom Tribe When You Feel Like You Don\'t Fit In',
+      body: `
+        <p>At 22, I was almost always the youngest mom in the room. The other women were kind, but our lives looked different. They had careers and mortgages and talked about things I wasn't navigating yet. I loved my daughter fiercely and still felt profoundly alone.</p>
+        <h3>Why young moms need other young moms</h3>
+        <p>There's something irreplaceable about being with someone who is in the exact same season. Someone who also can't remember the last time they showered without interruption. Someone who is also figuring out adulthood and motherhood simultaneously. You need that mirror.</p>
+        <h3>Where I actually found community</h3>
+        <p>Not at the polished mom groups. At a church small group that was honest. In a Facebook group where someone said something real at 2am and seventeen women responded within minutes. In a DM conversation with a stranger on Instagram who'd read something I posted. Community is smaller and closer than you think — it just requires one person to go first.</p>
+        <h3>Be the first</h3>
+        <p>If you are waiting for someone to invite you into community, I want to gently challenge you to be the one who extends the invitation. Text the mom from church. Post the honest caption. Send the DM. Say "me too" first. The community you're looking for is probably looking for you too — and someone has to go first.</p>
+        <p>That's part of why I built Rooted & Rising. So you don't have to wait. You're already here. 🌸</p>
+      `
+    }
+  };
+
+  // Comments stored per post in memory
+  const comments = {};
+  let currentPost = null;
+
+  // ── NAVIGATION ──────────────────────────────────────────────
+  function showSection(name) {
+    document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+    document.getElementById(name + '-section').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── MODAL ────────────────────────────────────────────────────
+  function openPost(id) {
+    const post = posts[id];
+    if (!post) return;
+    currentPost = id;
+    document.getElementById('modal-cat').textContent = post.cat;
+    document.getElementById('modal-title').textContent = post.title;
+    document.getElementById('modal-body').innerHTML = post.body;
+    renderComments(id);
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+    currentPost = null;
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+
+  // ── COMMENTS ─────────────────────────────────────────────────
+  function renderComments(postId) {
+    const list = document.getElementById('comment-list');
+    const postComments = comments[postId] || [];
+    if (postComments.length === 0) {
+      list.innerHTML = '<p style="font-size:0.88rem;color:var(--muted);font-style:italic">Be the first to share your thoughts 🌸</p>';
+    } else {
+      list.innerHTML = postComments.map(c => `
+        <div class="comment">
+          <div class="comment-author">${escHtml(c.name)}</div>
+          <div class="comment-text">${escHtml(c.text)}</div>
+          <div class="comment-time">${c.time}</div>
+        </div>
+      `).join('');
+    }
+    document.getElementById('comment-success').classList.remove('show');
+    document.getElementById('comment-name').value = '';
+    document.getElementById('comment-text').value = '';
+  }
+
+  function submitComment() {
+    const name = document.getElementById('comment-name').value.trim() || 'Anonymous Mama';
+    const text = document.getElementById('comment-text').value.trim();
+    if (!text) return;
+    if (!comments[currentPost]) comments[currentPost] = [];
+    const now = new Date();
+    comments[currentPost].push({
+      name,
+      text,
+      time: now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    });
+    renderComments(currentPost);
+    document.getElementById('comment-success').classList.add('show');
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── SUBSCRIBE ────────────────────────────────────────────────
+  function handleSubscribe(inputId, successId) {
+    const email = document.getElementById(inputId).value.trim();
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email address 🌸');
+      return;
+    }
+    // Opens Gmail compose with the subscriber's email pre-filled
+    // Replace this with a Mailchimp embed form action for real collection
+    const subject = encodeURIComponent('New Subscriber — Rooted & Rising');
+    const body = encodeURIComponent('New subscriber email: ' + email);
+    window.open(`mailto:Rootedandrising0725@gmail.com?subject=${subject}&body=${body}`);
+    document.getElementById(inputId).value = '';
+    document.getElementById(successId).classList.add('show');
+  }
+
+  // ── CONTACT FORM ─────────────────────────────────────────────
+  function handleContact() {
+    const name    = document.getElementById('contact-name').value.trim();
+    const email   = document.getElementById('contact-email').value.trim();
+    const type    = document.getElementById('contact-type').value;
+    const message = document.getElementById('contact-message').value.trim();
+    if (!name || !email || !message) {
+      alert('Please fill in your name, email, and message 🌸');
+      return;
+    }
+    const subject = encodeURIComponent(`[${type || 'Message'}] from ${name} — Rooted & Rising`);
+    const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nType: ${type}\n\nMessage:\n${message}`);
+    window.open(`mailto:Rootedandrising0725@gmail.com?subject=${subject}&body=${body}`);
+    document.getElementById('contact-name').value = '';
+    document.getElementById('contact-email').value = '';
+    document.getElementById('contact-type').value = '';
+    document.getElementById('contact-message').value = '';
+    document.getElementById('contact-success').classList.add('show');
+  }
+
+  // ── KEYBOARD CLOSE ───────────────────────────────────────────
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
